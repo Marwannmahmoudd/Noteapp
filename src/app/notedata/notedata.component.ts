@@ -21,7 +21,7 @@ userdata:any
 dataform!:FormGroup
 ngOnInit(): void {
   this.createform()
-  this.userdata = jwtDecode(localStorage.getItem('token')!)
+  this.userdata = jwtDecode(localStorage.getItem('token23')!)
   console.log(this.userdata);
   console.log(this.data);
   
@@ -31,18 +31,20 @@ createform():void{
   this.dataform= this.build.group({
 title:[this.data? this.data.note.title : '',Validators.required],
 desc:[this.data? this.data.note.desc : '',Validators.required],
-token:localStorage.getItem('token')
+token:localStorage.getItem('token23')
   })
 }
 senddata():void{
 if(this.dataform.valid){
+
+
   if(this.data === null){
     this.addnote()
   }else{
     this.updatedata()
   }
-  
 }
+
 
 }
 close(){
@@ -50,7 +52,7 @@ close(){
 }
 updatedata(){
   const modal = {
-    token:localStorage.getItem('token'),
+    token:localStorage.getItem('token23'),
    ...this.dataform.value,
 NoteID:this.data.note._id
   }

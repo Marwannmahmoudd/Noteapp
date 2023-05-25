@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavigationEnd, Route, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',

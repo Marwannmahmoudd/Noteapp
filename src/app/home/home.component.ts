@@ -38,7 +38,7 @@ ngOnInit(): void {
 deleteFile(id:any,index:any){
   const form = {
     NoteID:id,
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('token23'),
     
    }
   this.note.deletenote(form).subscribe({
@@ -68,7 +68,7 @@ getnotes(){
   this.notes = [...this.notes]
   this.spinner.show();
   const form = {
-   token: localStorage.getItem('token'),
+   token: localStorage.getItem('token23'),
    userID:this.user.user.getValue().id
   }
   console.log(form);
