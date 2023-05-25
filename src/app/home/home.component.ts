@@ -90,7 +90,7 @@ this.notes = res.Notes
 }
 logout(){
   this.router.navigate(['/login'])
-  localStorage.removeItem('token')
+  localStorage.removeItem('token23')
 }
 swal(id:any,index:any){
   const swalWithBootstrapButtons = Swal.mixin({
