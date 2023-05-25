@@ -1,0 +1,10 @@
+.dropdown-menu .dropdown-item{
+ all: unset;
+ display: block;
+ cursor: pointer;
+ padding: 0.25rem 1rem;
+    color: rgba(255, 255, 255, 0.55)!important;
+}
+#aa{
+    font-size: 16px!important;
+}

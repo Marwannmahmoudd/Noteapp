@@ -1,0 +1,83 @@
+<section>
+  <div class="row">
+    <div class="col-12">
+      <div class="col-2 ">
+        <div class='position-fixed '>
+          <div class="p-0 min-vh-100 bg-dark w-100" >
+            <ul class="text-light list-unstyled">
+      
+                <li class="p-3 pe-lg-2 hstack  align-items-center">
+                  <div>
+                <i class="fa-regular fa-note-sticky text-info fs-2"></i> 
+              </div>
+              <div class="">                  
+                <p class='ps-3 fs-4 m-0  d-none d-lg-inline'>Notes</p>
+              </div>        
+                </li>
+                
+                <li class="p-3 pe-lg-5 sidebar-element">
+                    <a to="/home" class="nav-link px-0 px-lg-2"><i class="fa-solid fa-house"></i><span class="px-lg-2 ms-1 d-none d-lg-inline">Home</span></a>
+                </li>
+              
+                <li class="p-3 pe-lg-5 sidebar-element">
+                    <a (click)="logout()" class="nav-link px-0 px-lg-2 cursor-pointor"><i class="fa-solid fa-arrow-right-from-bracket"></i><span class="px-lg-2 ms-1  d-none d-lg-inline">Logout</span> </a>
+                </li>
+      
+            </ul>
+        </div>
+        </div>
+      </div>
+    <div class="col-10 mx-auto">
+    <div class="container  px-lg-5 pe-5 py-5 ms-5">
+      <section class="py-4">
+          <div class=" col-md-12 mx-auto" *ngIf="notes.length">
+      
+         
+          <mat-form-field class="w-100" appearance="outline">
+              <mat-label>Search...</mat-label>
+              <input matInput type="text" [(ngModel)]="value">
+              <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+              <div class="ms-auto">
+      <button mat-raised-button color="primary" class="ms-auto d-block" (click)="openDialog()"><i class="fa-solid fa-plus pe-2"></i><span>Add Note</span></button>
+      
+      </div>
+      
+      </section>
+      
+      <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+          
+      <div class="col" *ngFor="let note of notes|filter:value index as index">
+      <div class="card h-100 shadow">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="position-absolute end-0">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" >
+              <button mat-menu-item (click)="updatenotes(note)">
+                <mat-icon>edit</mat-icon>
+                <span>Update</span>
+              </button>
+              <button mat-menu-item  (click)="swal(note._id,index)">
+                <mat-icon>delete_outline</mat-icon>
+                <span>Delete</span>
+              </button>
+            </mat-menu>
+           
+      
+          <div class="card-body text-center">
+             
+              <h3 class="h5 fw-bold px-3">{{note.title}}</h3>
+              <p class="small text-muted">{{note.desc}}</p>
+          </div>
+      </div>
+      </div>
+      
+      </section>
+</div>
+</div>
+</div>
+</div>
+</section>

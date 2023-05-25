@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+
+<section class="min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+    <div class="row g-0 shadow rounded overflow-hidden w-100">
+        <div class="col-lg-8 d-none d-md-block">
+            <img src="./assets/retrosupply-jLwVAUtLOAQ-unsplash.jpg" class="w-100 h-100 object-fit-cover">
+        </div>
+        <div class="col-md-4 ">
+            <form class="p-4" [formGroup]="registerform" (ngSubmit)="register(registerform)"  #ngForm="ngForm">
+                <h2 class="text-center title fs-5">Register</h2>
+                <mat-form-field class=" w-100 py-2" appearance="outline">
+                    <mat-label>Firstname</mat-label>
+                    <input type="text"  formControlName="first_name" [errorStateMatcher]="matcher" matInput>
+                    <mat-error *ngIf="registerform.get('first_name')?.getError('minlength')  ">
+                        min length is 3
+                    </mat-error>
+                    <mat-error *ngIf="registerform.get('first_name')?.getError('maxlength') ">
+                        min length is 10
+                    </mat-error>
+                    <mat-error *ngIf="registerform.get('first_name')?.getError('required') ">
+                     Firstname is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class=" w-100 py-2" appearance="outline">
+                    <mat-label>Lastname</mat-label>
+                    <input type="text"  formControlName="last_name" [errorStateMatcher]="matcher" matInput>
+                    <mat-error *ngIf="registerform.get('last_name')?.getError('minlength')  ">
+                        min length is 3
+                    </mat-error>
+                    <mat-error *ngIf="registerform.get('last_name')?.getError('maxlength') ">
+                        min length is 10
+                    </mat-error>
+                    <mat-error *ngIf="registerform.get('last_name')?.getError('required') ">
+                     Lastname is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                <mat-form-field class=" w-100 py-2" appearance="outline">
+                  <mat-label>Email</mat-label>
+                  <input type="email" formControlName="email" [errorStateMatcher]="matcher" matInput placeholder="Ex. pat@example.com">
+                  <mat-error *ngIf="registerform.get('email')?.hasError('email') && !registerform.get('email')?.hasError('email')  || registerform.get('email')?.getError('pattern') ">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="registerform.get('email')?.hasError('required') ">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class=" w-100 py-2" appearance="outline">
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [errorStateMatcher]="matcher" matInput >
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="registerform.get('password')?.getError('pattern') ">
+                        Minimum five characters, at least one letter and one number: 
+                    </mat-error>
+                    <mat-error *ngIf="registerform.get('password')?.getError('required')  ">
+                      Passowrd is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  <mat-form-field class=" w-100 py-2" appearance="outline">
+                    <mat-label>Age</mat-label>
+                    <input type="age" formControlName="age" [errorStateMatcher]="matcher" matInput placeholder="age">
+                
+                    <mat-error *ngIf="registerform.get('age')?.getError('required')  ">
+                     Age is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+                  
+                  <button mat-raised-button color="primary" class="w-100 mb-3" type="submit" ><span *ngIf="ooh == false">Create account</span><span *ngIf="ooh == true"><i class="fas fa-spinner fa-spin"></i></span></button> 
+                  <span class="fw-bold text-center d-block">Already Member ?<a routerLink="/login" class="text-main ps-2 ds">sign up</a></span>
+                </form>
+        </div>
+    </div>
+</div>
+</section>
