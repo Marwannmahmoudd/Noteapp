@@ -5,6 +5,7 @@ import jwtDecode from 'jwt-decode';
 import { MatDialogRef,MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from '../user.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notedata',
@@ -13,7 +14,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class NotedataComponent implements OnInit{
   
-constructor(private build:FormBuilder ,private user:UserService, private note:NoteService,public dialogRef: MatDialogRef<NotedataComponent>,@Inject(MAT_DIALOG_DATA) public data:any,private spinner: NgxSpinnerService){
+constructor(private build:FormBuilder ,private user:UserService,private toast:ToastrService, private note:NoteService,public dialogRef: MatDialogRef<NotedataComponent>,@Inject(MAT_DIALOG_DATA) public data:any,private spinner: NgxSpinnerService){
 
 }
 userdata:any
@@ -74,6 +75,7 @@ this.note.addnote(data).subscribe({
   next:(res)=>{
     console.log(res);
     if(res.message == 'success'){
+      this.toast.success('Note added')
       this.dialogRef.close('app')
     }
   }

@@ -30,6 +30,7 @@
     <div class="col-10 mx-auto">
     <div class="container  px-lg-5 pe-5 py-5 ms-5">
       <section class="py-4">
+       
           <div class=" col-md-12 mx-auto" *ngIf="notes.length">
       
          
@@ -47,9 +48,9 @@
       </div>
       
       </section>
-      
+      <h4 *ngIf="!notes.length" class="text-center">No notes found !</h4>
       <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          
+       
       <div class="col" *ngFor="let note of notes|filter:value index as index">
       <div class="card h-100 shadow">
           <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="position-absolute end-0">

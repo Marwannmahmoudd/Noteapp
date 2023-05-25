@@ -67,7 +67,7 @@
                     </mat-error>
                   </mat-form-field>
                   
-                  <button mat-raised-button color="primary" class="w-100 mb-3" type="submit" ><span *ngIf="ooh == false">Create account</span><span *ngIf="ooh == true"><i class="fas fa-spinner fa-spin"></i></span></button> 
+                  <button mat-raised-button color="primary" class="w-100 mb-3" type="submit" [disabled]="registerform.invalid" ><span *ngIf="ooh == false">Create account</span><span *ngIf="ooh == true"><i class="fas fa-spinner fa-spin"></i></span></button> 
                   <span class="fw-bold text-center d-block">Already Member ?<a routerLink="/login" class="text-main ps-2 ds">sign up</a></span>
                 </form>
         </div>

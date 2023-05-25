@@ -33,6 +33,7 @@ openDialog() {
 }
 ngOnInit(): void {
   this.getnotes()
+
 }
 deleteFile(id:any,index:any){
   const form = {
@@ -64,6 +65,7 @@ updatenotes(note:any){
     })
 }
 getnotes(){
+  this.notes = [...this.notes]
   this.spinner.show();
   const form = {
    token: localStorage.getItem('token'),
@@ -72,8 +74,12 @@ getnotes(){
   console.log(form);
   
    this.note.getnote(form).subscribe({
+    
     next:(res)=>{
+      
+      
       if(res.message === "success"){
+      
         this.spinner.hide();
 this.notes = res.Notes
       }
@@ -108,7 +114,7 @@ swal(id:any,index:any){
       this.deleteFile(id,index)
       swalWithBootstrapButtons.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Your Note has been deleted.',
         'success'
       )
     } else if (
