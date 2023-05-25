@@ -19,7 +19,7 @@
                     Email is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
-                <mat-form-field class=" w-100 py-2" appearance="outline">
+                <mat-form-field class=" w-100 py-4" appearance="outline">
                     <mat-label>Enter your password</mat-label>
                     <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" [errorStateMatcher]="matcher" matInput >
                     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide" type="button">

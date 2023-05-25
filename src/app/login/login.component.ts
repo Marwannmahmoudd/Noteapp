@@ -38,7 +38,7 @@ register(form:FormGroup){
       
     if(res.message == "success"){
       this.ooh=false
-     localStorage.setItem('token',res.token)
+     localStorage.setItem('token23',res.token)
       this.router.navigate(['/home'])
       this.user.userdata()
     }
