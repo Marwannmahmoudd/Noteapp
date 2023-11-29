@@ -7,20 +7,20 @@ import { Observable ,BehaviorSubject } from 'rxjs';
 export class NoteService {
 
   constructor(private http:HttpClient) { }
-  baseurl:any = 'https://sticky-note-fe.vercel.app/'
-  addnote(formdata:any):Observable<any>{
-return this.http.post(this.baseurl + 'addNote' , formdata)
+  baseurl:any = 'https://note-sigma-black.vercel.app/api/v1/notes'
+  headers:any = {
+    'token' : '3b8ny__'+localStorage.getItem('token23')
   }
-  Updatenote(formdata:any):Observable<any>{
-    return this.http.put(this.baseurl + 'updateNote' , formdata)
+  addnote(formdata:any):Observable<any>{
+    return this.http.post(this.baseurl , formdata , { headers : this.headers})
+  }
+  Updatenote(formdata:any , id:string):Observable<any>{
+    return this.http.put(this.baseurl + '/' + id , formdata , { headers : this.headers})
       }
-      getnote(formdata:any):Observable<any>{
-        return this.http.post(this.baseurl + 'getUserNotes' , formdata)
+      getnote():Observable<any>{
+        return this.http.get(this.baseurl ,{ headers : this.headers})
           }
-          deletenote(formdata:any):Observable<any>{
-            const modal ={
-              body:formdata
-            }
-            return this.http.delete(this.baseurl + 'deleteNote' , modal)
+          deletenote(id:string):Observable<any>{
+            return this.http.delete(this.baseurl + '/' + id , { headers : this.headers})
               }
 }

@@ -15,40 +15,43 @@ import Swal from 'sweetalert2';
 export class HomeComponent implements OnInit{
   value = '';
   notes:any[]=[]
+  emptyMsg:string = '';
 constructor(public dialog: MatDialog ,private router:Router, private note:NoteService,private user:UserService,private spinner: NgxSpinnerService){
 
 }
 openDialog() {
   const dialogRef = this.dialog.open(NotedataComponent);
 
-  dialogRef.afterClosed().subscribe({
-    next:(res)=>{
-     if(res === 'app'){
-      this.getnotes()
-     }
+  dialogRef.afterClosed().subscribe(result =>{
+     
+      if (result === 'done') {
+        this.getnotes()
+      }
+     
+
     
-      
-    }
-  })
+    
+  });
 }
 ngOnInit(): void {
   this.getnotes()
-
+console.log(this.notes.length)
 }
 deleteFile(id:any,index:any){
   const form = {
     NoteID:id,
-    token: localStorage.getItem('token23'),
+    token: localStorage.getItem('token23')!
     
    }
-  this.note.deletenote(form).subscribe({
-    next:(res)=>{
-     if(res.message === 'deleted'){
-      this.notes.splice(index,1)
-      this.notes = [...this.notes]
-     }
-      
-    }
+   this.notes.splice(index,1)
+   this.notes = [...this.notes]
+  this.note.deletenote(id).subscribe({
+    next:res=>{
+      //console.log(res);
+    },
+    error:err=>{
+     // console.log(err);
+    }      
   })
   
 }
@@ -65,25 +68,31 @@ updatenotes(note:any){
     })
 }
 getnotes(){
-  this.notes = [...this.notes]
+  //this.notes = [...this.notes]
   this.spinner.show();
-  const form = {
+  const data = {
    token: localStorage.getItem('token23'),
    userID:this.user.user.getValue().id
   }
-  console.log(form);
+  console.log(data);
   
-   this.note.getnote(form).subscribe({
+   this.note.getnote().subscribe({
     
     next:(res)=>{
-      
-      
-      if(res.message === "success"){
+      console.log(res);
+      console.log(this.notes.length)
+      if(res.msg  === 'done'){
       
         this.spinner.hide();
-this.notes = res.Notes
+this.notes = res.notes
+      }
+      else{
+        this.emptyMsg =  res.msg ;
       }
       
+    },
+    error:err=>{
+      console.log(err);
     }
 
    })

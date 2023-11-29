@@ -7,17 +7,24 @@ import jwtDecode from 'jwt-decode';
   providedIn: 'root'
 })
 export class UserService {
+
+
   user:BehaviorSubject<any>=new BehaviorSubject(null)
-  baseurl:string = "https://sticky-note-fe.vercel.app/"
-  constructor(private _userservice:HttpClient, private _router:Router) { 
+  baseUrl:string =  'https://note-sigma-black.vercel.app/api/v1/users/'
+  constructor(private _userservice:HttpClient, private _router:Router ) { 
     this.userdata()
   }
   getdata(data:object):Observable<any>{
-    return this._userservice.post(this.baseurl + "signup" , data)
+    return this._userservice.post(`${this.baseUrl}signUp`   ,data)
     } 
     sentdata(data:object):Observable<any>{
-     return this._userservice.post(this.baseurl + "signin" , data)
+      return this._userservice.post(`${this.baseUrl}signIn` , data)
      } 
+     logout(){
+      localStorage.removeItem('token23')
+      this.user.next(null)
+      this._router.navigate(['/login'])
+    }
      userdata():void{
       let data = localStorage.getItem('token23')
       if(data !== null){
@@ -25,6 +32,7 @@ export class UserService {
         this.user.next(decode)
         this._router.navigate(['/home'])
       }
+   
      
      }
 }

@@ -25,11 +25,12 @@ export class RegisterComponent implements OnInit {
 constructor(private build:FormBuilder,private user:UserService,private toast:ToastrService,private router:Router){}
 ooh:boolean = false
 registerform:FormGroup  = this.build.group({
-  first_name:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
-  last_name:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
+  name:new FormControl('',[Validators.required,Validators.minLength(3),Validators.maxLength(14)]),
+ 
   email:new FormControl('',[Validators.required,Validators.email,Validators.pattern(/(com|net)$/)]),
-  password:new FormControl(null,[Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]),
+  password:new FormControl(null,[Validators.required,Validators.pattern(/^[A-Z][a-z0-9]{8,16}$/)]),
   age:new FormControl('',[Validators.required]),
+  phone:new FormControl('',[Validators.required,Validators.pattern(/^01[0125][0-9]{8}$/)])
  })
 ngOnInit(): void {
   this.createform()
@@ -41,7 +42,8 @@ register(form:FormGroup){
   this.ooh = true
   this.user.getdata(form.value).subscribe({
     next:(res)=>{
-    if(res.message == "success"){
+      console.log(res);
+    if(res.msg == "done"){
       this.ooh=false
       console.log("ghf");
       this.router.navigate(['/login'])
@@ -51,7 +53,7 @@ register(form:FormGroup){
     },
     error:(dataa)=>{
       this.ooh=false
-      this.toast.error(dataa.error.message)
+      this.toast.error(dataa.error.msg)
       console.log(dataa);
     }
   })

@@ -25,7 +25,7 @@ constructor(private build:FormBuilder,private user:UserService,private toast:Toa
 ooh:boolean = false
 registerform:FormGroup  = this.build.group({
   email:new FormControl('',[Validators.required,Validators.email,Validators.pattern(/(com|net)$/)]),
-  password:new FormControl(null,[Validators.required,Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,}$/)]),
+  password:new FormControl(null,[Validators.required,Validators.pattern(/^[A-Z][a-z0-9]{8,16}$/)]),
 })
 ngOnInit(): void {
 }
@@ -36,7 +36,7 @@ register(form:FormGroup){
     next:(res)=>{
       console.log(res);
       
-    if(res.message == "success"){
+    if(res.msg == "done"){
       this.ooh=false
      localStorage.setItem('token23',res.token)
       this.router.navigate(['/home'])
@@ -47,7 +47,7 @@ register(form:FormGroup){
     },
     error:(dataa)=>{
       this.ooh=false
-      this.toast.error(dataa.error.message)
+      this.toast.error(dataa.error.msg)
       console.log(dataa);
     }
   })

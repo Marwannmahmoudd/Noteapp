@@ -31,7 +31,7 @@
     <div class="container  px-lg-5 pe-5 py-5 ms-5">
       <section class="py-4">
        
-          <div class=" col-md-12 mx-auto" *ngIf="notes.length">
+          <div class=" col-md-12 mx-auto" *ngIf="notes.length > 0">
       
          
           <mat-form-field class="w-100" appearance="outline">
@@ -48,7 +48,7 @@
       </div>
       
       </section>
-      <h4 *ngIf="!notes.length" class="text-center">No notes found !</h4>
+    <h4 *ngIf="notes.length == 0" class="text-center">No notes found !</h4>
       <section class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
        
       <div class="col" *ngFor="let note of notes|filter:value index as index">
@@ -71,7 +71,7 @@
           <div class="card-body text-center">
              
               <h3 class="h5 fw-bold px-3">{{note.title}}</h3>
-              <p class="small text-muted">{{note.desc}}</p>
+              <p class="small text-muted">{{note.content}}</p>
           </div>
       </div>
       </div>

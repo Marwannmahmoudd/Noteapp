@@ -11,19 +11,19 @@
       
         <mat-form-field class="w-100 py-3" appearance="outline" >
           <mat-label>Leave a Note</mat-label>
-          <textarea matInput placeholder="Ex. It makes me feel..." formControlName="desc"></textarea>
-          <mat-error *ngIf="dataform.get('desc')?.hasError('required') ">
-            Description is <strong>required</strong>
+          <textarea matInput placeholder="Ex. It makes me feel..." formControlName="content"></textarea>
+          <mat-error *ngIf="dataform.get('content')?.hasError('required') ">
+            content is <strong>required</strong>
            </mat-error>
         </mat-form-field>
         <div class="d-flex">
-            <div class="me-2" *ngIf="!data">
+            <div class="me-2" *ngIf="data === null">
         <button mat-raised-button color="primary">Add note</button>
     </div>
     <div class="me-2" *ngIf="data">
         <button mat-raised-button color="primary">Update note</button>
     </div>
-    <div class="ms-auto">
+   <div class="ms-auto">
         <button mat-button mat-dialog-close mat-raised-button color="warn" (click)="close()">Close</button>
     </div>
     </div>

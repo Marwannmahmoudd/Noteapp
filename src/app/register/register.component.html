@@ -6,35 +6,23 @@
         <div class="col-lg-8 d-none d-md-block">
             <img src="./assets/retrosupply-jLwVAUtLOAQ-unsplash.jpg" class="w-100 h-100 object-fit-cover">
         </div>
-        <div class="col-md-4 ">
+        <div class="col-lg-4 col-md-12">
             <form class="p-4" [formGroup]="registerform" (ngSubmit)="register(registerform)"  #ngForm="ngForm">
                 <h2 class="text-center title fs-5">Register</h2>
                 <mat-form-field class=" w-100 py-2" appearance="outline">
-                    <mat-label>Firstname</mat-label>
-                    <input type="text"  formControlName="first_name" [errorStateMatcher]="matcher" matInput>
-                    <mat-error *ngIf="registerform.get('first_name')?.getError('minlength')  ">
+                    <mat-label>Name</mat-label>
+                    <input type="text"  formControlName="name" [errorStateMatcher]="matcher" matInput>
+                    <mat-error *ngIf="registerform.get('name')?.getError('minlength')  ">
                         min length is 3
                     </mat-error>
-                    <mat-error *ngIf="registerform.get('first_name')?.getError('maxlength') ">
-                        min length is 10
+                    <mat-error *ngIf="registerform.get('name')?.getError('maxlength') ">
+                        min length is 14
                     </mat-error>
-                    <mat-error *ngIf="registerform.get('first_name')?.getError('required') ">
-                     Firstname is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field class=" w-100 py-2" appearance="outline">
-                    <mat-label>Lastname</mat-label>
-                    <input type="text"  formControlName="last_name" [errorStateMatcher]="matcher" matInput>
-                    <mat-error *ngIf="registerform.get('last_name')?.getError('minlength')  ">
-                        min length is 3
-                    </mat-error>
-                    <mat-error *ngIf="registerform.get('last_name')?.getError('maxlength') ">
-                        min length is 10
-                    </mat-error>
-                    <mat-error *ngIf="registerform.get('last_name')?.getError('required') ">
-                     Lastname is <strong>required</strong>
+                    <mat-error *ngIf="registerform.get('name')?.getError('required') ">
+                      Name is <strong>required</strong>
                     </mat-error>
                   </mat-form-field>
+          
                 <mat-form-field class=" w-100 py-2" appearance="outline">
                   <mat-label>Email</mat-label>
                   <input type="email" formControlName="email" [errorStateMatcher]="matcher" matInput placeholder="Ex. pat@example.com">
@@ -52,7 +40,7 @@
                       <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                     <mat-error *ngIf="registerform.get('password')?.getError('pattern') ">
-                        Minimum five characters, at least one letter and one number: 
+                      Minimum Nine characters, Start with Capital Character
                     </mat-error>
                     <mat-error *ngIf="registerform.get('password')?.getError('required')  ">
                       Passowrd is <strong>required</strong>
@@ -65,6 +53,13 @@
                     <mat-error *ngIf="registerform.get('age')?.getError('required')  ">
                      Age is <strong>required</strong>
                     </mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class=" w-100 py-2" >
+                    <mat-label>Your Phone</mat-label>
+                    <input matInput type="tel"  placeholder="10-80" formControlName="phone">
+                    <mat-error *ngIf="registerform.get('phone')?.getError('required')">phone is rquired</mat-error>
+                    <mat-error *ngIf="registerform.get('phone')?.getError('pattern')">phone is not Valid</mat-error>
+  
                   </mat-form-field>
                   
                   <button mat-raised-button color="primary" class="w-100 mb-3" type="submit" [disabled]="registerform.invalid" ><span *ngIf="ooh == false">Create account</span><span *ngIf="ooh == true"><i class="fas fa-spinner fa-spin"></i></span></button> 

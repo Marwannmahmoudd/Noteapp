@@ -17,10 +17,12 @@ export class NotedataComponent implements OnInit{
 constructor(private build:FormBuilder ,private user:UserService,private toast:ToastrService, private note:NoteService,public dialogRef: MatDialogRef<NotedataComponent>,@Inject(MAT_DIALOG_DATA) public data:any,private spinner: NgxSpinnerService){
 
 }
+citizenID!:string
 userdata:any
 dataform!:FormGroup
 ngOnInit(): void {
   this.createform()
+  this.citizenID = this.user.user.getValue()._id
   this.userdata = jwtDecode(localStorage.getItem('token23')!)
   console.log(this.userdata);
   console.log(this.data);
@@ -29,8 +31,8 @@ ngOnInit(): void {
 }
 createform():void{
   this.dataform= this.build.group({
-title:[this.data? this.data.note.title : '',Validators.required],
-desc:[this.data? this.data.note.desc : '',Validators.required],
+title:[this.data == null ? '': this.data?.note.title  ,Validators.required],
+content:[this.data == null ? '': this.data?.note.content ,Validators.required],
 token:localStorage.getItem('token23')
   })
 }
@@ -51,17 +53,21 @@ close(){
   this.dialogRef.close()
 }
 updatedata(){
-  const modal = {
-    token:localStorage.getItem('token23'),
+  const data = {
+   // token:localStorage.getItem('token23'),
    ...this.dataform.value,
 NoteID:this.data.note._id
   }
-this.note.Updatenote(modal).subscribe({
+  let id = this.data.note._id
+this.note.Updatenote(data,id).subscribe({
   next:(res)=>{
     console.log(res);
-    if(res.message === 'updated'){
+    if(res.msg === 'done'){
       this.dialogRef.close('update')
     }
+  },
+  error:err=>{
+    console.log(err);
   }
 })
 }
@@ -76,10 +82,13 @@ addnote():void{
 this.note.addnote(data).subscribe({
   next:(res)=>{
     console.log(res);
-    if(res.message == 'success'){
+    if(res.msg == 'done'){
       this.toast.success('Note added')
-      this.dialogRef.close('app')
+      this.dialogRef.close('done')
     }
+  },
+  error:err=>{
+    console.log(err);
   }
 })
 }
